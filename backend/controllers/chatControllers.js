@@ -156,8 +156,6 @@ const removeFromGroup = asyncHandler(async (req, res) => {
 const addToGroup = asyncHandler(async (req, res) => {
   const { chatId, userId } = req.body;
 
-  // check if the requester is admin
-
   const added = await Chat.findByIdAndUpdate(
     chatId,
     {
