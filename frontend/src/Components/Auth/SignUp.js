@@ -1,6 +1,6 @@
-import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, VStack, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import axios from 'axios';
+import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, VStack, useToast } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
@@ -16,36 +16,6 @@ const SignUp = () => {
 
 
     const handleClick = () => setShow(!show);
-
-    const uploadPic = (pic) =>{
-        setLoading(true);
-        if(pic === undefined){
-            toast({
-                title:"Please select an image",
-                status: 'warning',
-                duration:5000,
-                isClosable: true,
-                position: 'bottom'
-            });
-            return;
-        }
-
-        if(pic.type==='image/jpeg' || pic.type === 'image/png'){
-            const data = new FormData();
-            data.append("file", pic);
-            data.append("upload_preset", "chat_app");
-            data.append("cloud_name", 'dsvgtprgh');
-            fetch('https://api.cloudinary.com/v1_1/dsvgtprgh/image/upload', {
-                method:'post',
-                body:data,
-            })
-            .then((res) =>res.json())
-            .then((data) => {
-                setPic(data.url.toString());
-                setLoading(false);
-            })
-        }
-    };
     
     const submitHandler = async(req,res) =>{
         setLoading(true);
@@ -79,7 +49,7 @@ const SignUp = () => {
             };
 
             const {data} = await axios.post(
-            '/api/user', 
+                '/api/user', 
                 {name, email, password, pic},
                 config
             );
@@ -94,7 +64,7 @@ const SignUp = () => {
             localStorage.setItem("userInfo", JSON.stringify(data));
             
             setLoading(false);
-            navigate('/chats');
+            navigate('/chat');
             
         }catch(error){
             toast({
@@ -107,6 +77,36 @@ const SignUp = () => {
             setLoading(false);
         }
     };
+    const uploadPic = (pic) =>{
+        setLoading(true);
+        if(pic === undefined){
+            toast({
+                title:"Please select an image",
+                status: 'warning',
+                duration:5000,
+                isClosable: true,
+                position: 'bottom'
+            });
+            return;
+        }
+
+        if(pic.type==='image/jpeg' || pic.type === 'image/png'){
+            const data = new FormData();
+            data.append("file", pic);
+            data.append("upload_preset", "chat_app");
+            data.append("cloud_name", "dsvgtprgh");
+            fetch('https://api.cloudinary.com/v1_1/dsvgtprgh/image/upload', {
+                method:'post',
+                body:data,
+            })
+            .then((res) =>res.json())
+            .then((data) => {
+                setPic(data.url.toString());
+                setLoading(false);
+            })
+        }
+    };
+    
   return (
     <VStack spacing='5px'>
         <FormControl id='first-name' isRequired>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Button,
   FormControl,
@@ -9,22 +10,21 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { ChatState } from "../../Context/ChatProvider";
 import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
-  const handleClick = () => setShow(!show);
-  const toast = useToast();
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
   const { setUser } = ChatState();
+  const toast = useToast();
   const navigate = useNavigate();
-
-
+  
+  const handleClick = () => setShow(!show);
+  
   const submitHandler = async() => {
     setLoading(true);
     if (!email || !password) {
@@ -62,7 +62,7 @@ const Login = () => {
       setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-      navigate('/chats');
+      navigate('/chat');
     } catch (error) {
       toast({
         title: "Error Occured!",
@@ -115,7 +115,7 @@ const Login = () => {
         variant='solid'
         colorScheme="red"
         width="100%"
-        // style={{ marginTop: 15 }}
+        style={{ marginTop: 15 }}
         onClick={() => {
             setEmail('guest@gmail.com')
             setPassword('1234')

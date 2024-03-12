@@ -12,7 +12,7 @@ const Homepage = () => {
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
         if(!userInfo){
-            navigate('/chats');
+            navigate('/chat');
         }
     },[navigate]);
   return (
