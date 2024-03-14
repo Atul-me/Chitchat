@@ -7,7 +7,7 @@ import { AddIcon } from '@chakra-ui/icons';
 import { getSender } from "../Config/chatLogics";
 import GroupChatModal from "./Main/GroupChatModal";
 
-const MyChats = () => {
+const MyChats = ({fetchAgain}) => {
   const [loggedUser, setLoggedUser] = useState();
   const {selectedChat, setSelectedChat, user, chats, setChats} = ChatState();
 
@@ -40,7 +40,7 @@ const MyChats = () => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
     // eslint-disable-next-line
-  }, [fetchChats()]);
+  }, [fetchAgain]);
 
   return (
     <Box
