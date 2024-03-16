@@ -45,7 +45,7 @@ const Login = () => {
           "Content-type": "application/json",
         },
       };
-
+      console.log(data);
       const { data } = await axios.post(
         '/api/user/login',
         { email, password },
@@ -59,7 +59,7 @@ const Login = () => {
         isClosable: true,
         position: "bottom",
       });
-      console.log(data);
+      // console.log(data);
       setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
