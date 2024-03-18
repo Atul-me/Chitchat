@@ -15,7 +15,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
-  console.log('qwertyuiop');
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -59,7 +58,6 @@ const Login = () => {
         isClosable: true,
         position: "bottom",
       });
-      // console.log(data);
       setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
