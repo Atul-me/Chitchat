@@ -82,7 +82,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
         setNewMessage("");
         const { data } = await axios.post(
-          "/api/message",
+          '/api/message',
           {
             content: newMessage,
             chatId: selectedChat,
@@ -103,7 +103,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       }
     }
   };
-
+  
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("setup", user);
