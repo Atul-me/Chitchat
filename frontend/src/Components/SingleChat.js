@@ -7,7 +7,7 @@ import { getSender, getSenderFull } from "../Config/chatLogics";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import ProfileModal from "./Main/GroupChatModal";
+import ProfileModal from "./Main/ProfileModal";
 import ScrollableChat from "./ScrollableChat";
 import Lottie from "react-lottie";
 import animationData from "../animations/typing.json";
@@ -82,7 +82,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
         setNewMessage("");
         const { data } = await axios.post(
-          '/api/message',
+          "/api/message",
           {
             content: newMessage,
             chatId: selectedChat,
@@ -103,7 +103,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       }
     }
   };
-  
+
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("setup", user);
